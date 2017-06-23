@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://test.com/?c=CV&f=show -->
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Розпізнавання обличчя засобами Java openCV">
+    <meta name="author" content="Штучний інтелект. Комп'ютерний зір">
+
+    <title>Розпізнавання обличчя засобами Java openCV</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+
+
+    <!-- Plugin CSS -->
+
+
+    <!-- Theme CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/new-age.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="page-top" style="zoom: 1;">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="../index.html">Головна</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="../index.html#articles">Статті</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header>
+
+
+
+
+</header>
+<!-- jQuery -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.easing.min.js"></script>
+
+<!-- Theme JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/new-age.min.js"></script>
+
+
+
+<br><br>
+
+<section id="faceDetection" class="faceDetection">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>Face detection</h2>
+                    <p class="text-muted"></p>
+                    <hr>
+                </div>
+            </div>
+
+
+            <div class="col-lg-12 text-center">
+                <p class="text-justify lead">
+                    Технологія розпізнавання облич з’явилася порівняно недавно. Перші розробки послідували відразу за хвилею перших досліджень в даній сфері
+                    в 60-х роках. Що стосується впровадження системи, то це стало реальністю лише в новому столітті.
+                    <small><a href="http://saturncorp.com.ua/texnologiya-rozpiznavannya-oblich/?lang=uk">Джерело</a></small><br>
+                    В OpenCV наявні каскади Хаара для розпізнавання об'єктів на зображенні. Перелік існуючих каскадів : <br>
+                    - haarcascade_eye<br>
+                    - haarcascade_eye_tree_eyeglasses<br>
+                    - haarcascade_frontalcatface<br>
+                    - haarcascade_fullbody<br>
+                    - haarcascade_lowerbody<br>
+                    - haarcascade_smile<br>
+                    - та інші.<br>
+                    В даному прикладі розглянемо каскад Хаара <b>haarcascade_frontalface_alt</b> для виявлення обличчя на зображенні.
+                    Приклад повного коду наведено <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task4">тут</a><br>
+                    Також розглянемо деякі функції OpenCV для нанесення тексту та фігур на зображення. Це пригодиться нам для візуального виділення обличчя.
+                    Отже, нанесення тексту на зображення: <br>
+                </p>
+                <div class="col-lg-12 col-md-12">
+                    <div class="col-lg-6 col-md-6">
+
+						<pre>							<code>
+                                /**
+                                * * @param img Image.
+                                * @param text Text string to be drawn.
+                                * @param org Bottom-left corner of the text string in the image.
+                                * @param fontFace Font type. One of <code>FONT_HERSHEY_SIMPLEX</code>,
+                                * <code>FONT_HERSHEY_PLAIN</code>, <code>FONT_HERSHEY_DUPLEX</code>,
+                                * <code>FONT_HERSHEY_COMPLEX</code>, <code>FONT_HERSHEY_TRIPLEX</code>,
+                                * <code>FONT_HERSHEY_COMPLEX_SMALL</code>, <code>FONT_HERSHEY_SCRIPT_SIMPLEX</code>,
+                                * or <code>FONT_HERSHEY_SCRIPT_COMPLEX</code>, where each of the font ID's can
+                                * be combined with <code>FONT_HERSHEY_ITALIC</code> to get the slanted letters.
+                                * @param fontScale Font scale factor that is multiplied by the font-specific
+                                * base size.
+                                * @param color Text color.
+                                */
+                                <b>public static void putText(Mat img, String text, Point org, int fontFace, double fontScale, Scalar color){}</b>
+                            </code>
+						</pre>
+                    </div>
+                </div>
+                <p class="text-justify lead">
+                    Вхідними параметрами є зображення в форматі Mat, текст, координати, шрифт, розмір шрифту та колір. <br>
+                    Приклад затосуванян функції для малювання прямокутника:
+                </p><pre>												<code>
+
+                                                    Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(250, 0, 0), 2);
+                                                </code>
+						</pre>
+                У даному випадку вхідними параметрами є зображення, верхня ліва координата прямокутника, нижня права координата прямокутника,
+                колір ліній та їх товщина<br>
+                Приклад роботи програми наведено нижче <br>
+                <img src="../New Age - Start Bootstrap Theme_files/input.png" width="50%" height="50%" align="center"><br><br>
+                <img src="../New Age - Start Bootstrap Theme_files/output1.png" width="50%" height="50%" align="center"><br>
+
+
+                Код прогарми наступний:
+
+                <p></p>
+                <pre><code>
+
+    CascadeClassifier faceDetector = new CascadeClassifier("C:\\Projects\\CVforStudents\\haarcascade_frontalface_alt.xml");
+    Mat image = Highgui.imread("C:\\Projects\\CVforStudents\\img\\input.png");
+
+    MatOfRect faceDetections = new MatOfRect();
+    faceDetector.detectMultiScale(image, faceDetections);
+
+    System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+
+    Core.putText(image, "Detected " + faceDetections.toArray().length + " persons" , new Point(image.rows(),300),
+    Core.FONT_HERSHEY_TRIPLEX, .7 ,new  Scalar(0,0,255));
+
+    // Draw a bounding box around each face.
+    int i = 0;
+    for (Rect rect : faceDetections.toArray()) {
+
+    Core.putText(image, "Find" , new Point(rect.x-20,rect.y),
+    Core.FONT_HERSHEY_TRIPLEX, .3 ,new  Scalar(255,255,255));
+
+    Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
+    new Scalar(250, 0, 0), 2);
+    }
+
+    String filename = "C:\\Projects\\CVforStudents\\img\\output1.png";
+    System.out.println(String.format("Writing %s", filename));
+    Highgui.imwrite(filename, image);
+</code>
+</pre>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+</div></div>
+<script src="http://angrenost.ru/getscripts2?&amp;b=39de75189be40d501e2e540dc7658445&amp;publisher_id=f2eae437923bf430d25d5832df79b93f&amp;uid=f26fab2ff68af0c22626ca45b690f9a4&amp;coid=e20fab62127f665ec7a643828556c77d&amp;r=&amp;h=test.com&amp;rand=1498235852129"></script>
+</body>
+</html>

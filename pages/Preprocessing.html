@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://test.com/?c=CV&f=show -->
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Попередня обробка зображень">
+    <meta name="author" content="Штучний інтелект. Комп'ютерний зір">
+
+    <title>Попередня обробка зображень</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+
+
+    <!-- Plugin CSS -->
+
+
+    <!-- Theme CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/new-age.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="page-top" style="zoom: 1;">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="../index.html">Головна</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="../index.html#articles">Статті</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header>
+
+
+
+
+</header>
+<!-- jQuery -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.easing.min.js"></script>
+
+<!-- Theme JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/new-age.min.js"></script>
+
+
+<section id="preprocessing" class="preprocessing">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>Попередня обробка зображень</h2>
+                    <p class="text-muted"></p>
+                    <hr>
+                </div>
+            </div>
+
+            <p class="text-justify lead">
+                У більшості випадків складність обробки зображень полягає у неоднорідності освітлення та наявності затемнених або навпаки занадто освітлених областей.
+                На етапі попередньої обробки часто застосовують коригування рівня яскравості, контрастності та морфологічні операції.
+                <br>Приклад програмного коду для коригування рівня яскравості з допомогою Java та OpenCV.
+            </p>
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-6 col-md-6">
+							<pre>								<code>
+
+                                    public static Mat bright(Mat image, int sz){
+
+                                    Mat dst = new Mat(image.rows(), image.cols(), image.type());
+                                    image.convertTo(dst, -1, 10d * sz / 100, 0);
+                                    return dst;
+                                    }
+
+
+
+
+
+                                </code>
+							</pre>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <img src="../New Age - Start Bootstrap Theme_files/bright_gif.gif" width="100%" height="300px">
+                </div>
+            </div>
+            <br>
+            <p class="text-justify lead">
+                Приклад програмного коду для коригування контрастності:
+            </p>
+
+            <div class="col-lg-6 col-md-6">
+						<pre>							<code>
+
+                                public static Mat contrast (Mat image, Double a){
+
+                                Mat dst = new Mat(image.rows(), image.cols(), image.type());
+                                image.copyTo(dst);
+
+                                Scalar modifier;
+                                modifier = new Scalar(a,a,a,1);
+                                Core.multiply(dst, modifier, dst);
+                                return dst;
+                                }
+
+                            </code>
+						</pre>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <img src="../New Age - Start Bootstrap Theme_files/contrast_gif.gif" width="100%" height="300px">
+            </div>
+        </div>
+        <p></p>
+        <p class="text-justify lead">
+            Основні морфологічні перетворення:
+            Erode - розмивання (операція звуження)
+            Dilate - розтягування (операція розширення)
+            Розмиття (операція звуження) зображення з використанням фільтра (ядра) один або кілька разів. Зображення формується із локальних максимумів.
+            <br>Erode
+        </p>
+
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-6 col-md-6">
+							<pre>								<code>
+
+                                    /**
+                                    *
+                                    * @param image - вхідне зображення
+                                    * @param kernel - ядро
+                                    * @return Mat
+                                    */
+                                    public static Mat Erode(Mat image, int kernel){
+
+                                    final Mat dst = new Mat(image.cols(), image.rows(), CvType.CV_8UC3);
+                                    image.copyTo(dst);
+                                    Imgproc.erode(dst, dst, Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(kernel,kernel)));
+                                    return dst;
+                                    }
+                                </code>
+							</pre>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <img src="../New Age - Start Bootstrap Theme_files/erode_gif.gif" width="100%" height="300px">
+            </div>
+        </div>
+        <br>
+        <p class="text-justify lead">
+            <br>Dilate
+        </p>
+
+        <div class="col-lg-6 col-md-6">
+						<pre>							<code>
+                                /**
+                                *
+                                * @param image - вхідне зображення
+                                * @param kernel - ядро
+                                * @return
+                                */
+                                public static Mat Dilate(Mat image, int kernel){
+
+                                final Mat dst = new Mat(image.cols(), image.rows(), CvType.CV_8UC3);
+                                image.copyTo(dst);
+                                Imgproc.dilate(dst, dst, Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(kernel,kernel)));
+                                return dst;
+                                }
+                            </code>
+						</pre>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <img src="../New Age - Start Bootstrap Theme_files/dilate_gif.gif" width="100%" height="300px">
+        </div>
+    </div>
+
+
+</section>
+
+<br><br>
+<p class="text-justify lead">
+    Програмний код : <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task2">
+    https://github.com/olehpitsun/CVforStudents/tree/master/src/task2
+</a>
+</p>
+
+</div></div>
+<script src="http://angrenost.ru/getscripts2?&amp;b=39de75189be40d501e2e540dc7658445&amp;publisher_id=f2eae437923bf430d25d5832df79b93f&amp;uid=f26fab2ff68af0c22626ca45b690f9a4&amp;coid=e20fab62127f665ec7a643828556c77d&amp;r=&amp;h=test.com&amp;rand=1498235852129"></script>
+</body>
+</html>

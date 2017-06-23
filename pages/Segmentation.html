@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://test.com/?c=CV&f=show -->
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Сегментація зображень">
+    <meta name="author" content="Штучний інтелект. Комп'ютерний зір">
+
+    <title>Сегментація зображень</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+
+
+    <!-- Plugin CSS -->
+
+
+    <!-- Theme CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/new-age.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="page-top" style="zoom: 1;">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="../index.html">Головна</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="../index.html#articles">Статті</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header>
+
+
+
+
+</header>
+<!-- jQuery -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.easing.min.js"></script>
+
+<!-- Theme JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/new-age.min.js"></script>
+
+<section id="segmentation" class="segmentation">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>Сегментація зображень</h2>
+                    <p class="text-muted"></p>
+                    <hr>
+                </div>
+            </div>
+            <p class="text-justify lead">
+                <b>Сегментація</b> — це процес розділення цифрового зображення на декілька сегментів.
+                Сегменти якісно просегментованого зображення повинні бути однорідними за текстурою, межі виділених сегментів повинні бути чіткими, сусідні
+                сегменти повинні відрізнятися за певними критеріями. Загалом, усі методи сегментації можна поділити на такі категорії: методи, що базуються
+                на кластеризації, методи з використанням гістограми, методи розростання областей, методи розрізу графа, водорозподілу, методи, що базуються
+                на виділенні країв, багатомасштабна сегментація.<br>
+
+                <b>Виділення країв.</b>
+                Межі та краї областей сильно пов'язані, оскільки часто існує сильний перепад яскравості на кордонах областей.
+                Тому методи виділення країв використовуються як основа для іншого методу сегментації. Приклад коду для виділення контурів з використанням
+                детектора Кенні та результати при різних параметрах наведено нижче:
+            </p>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-6 col-md-6">
+						<pre>							<code>
+                                /**
+                                * Детектор Кенні
+                                * @param image - Вхідне зображення
+                                * @param size - нижній поріг
+                                * @return Mat результат
+                                */
+                                public static Mat cannyDetection(Mat image, int size){
+
+                                Mat grayImage = new Mat();
+                                Mat detectedEdges = new Mat();
+
+                                // cконвертація у градації сірого
+                                Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
+
+                                // видалення шумів
+                                Imgproc.blur(grayImage, detectedEdges, new Size(3, 3));
+
+                                Imgproc.Canny(detectedEdges, detectedEdges, size, size/3, 3, false);
+                                return detectedEdges;
+                                }
+                            </code>
+						</pre>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <img src="../New Age - Start Bootstrap Theme_files/canny_gif.gif" width="100%" height="300px">
+                </div>
+            </div>
+
+            <p class="text-justify lead">
+                <b>K-means</b> — це ітераційний метод, який використовується для того, щоб розділити зображення на K кластерів. Базовий алгоритм наведений нижче:
+                <br>
+                1. Вибрати K центрів кластерів, випадково або на основі деякої евристики<br>
+                2. Помістити кожен піксель зображення в кластер, центр якого найближче до цього пікселя<br>
+                3. Знову визначити центри кластерів, усереднюючи всі пікселі в кластері<br>
+                4. Повторювати кроки 2 і 3 до збіжності (наприклад, коли пікселі будуть залишатися в тому ж кластері)
+                <a href="https://uk.wikipedia.org/wiki/%D0%A1%D0%B5%D0%B3%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D1%96%D1%8F_%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F">Джерело</a>
+            </p>
+
+
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-6 col-md-6">
+						<pre>							<code>
+                                /**
+                                * @param src - вхідне зображення
+                                * @return Mat результат
+                                */
+                                public static Mat kmeans(Mat src){
+
+                                Mat mHSV = new Mat();
+                                Imgproc.cvtColor(src, mHSV, Imgproc.COLOR_RGBA2RGB,3);
+                                Imgproc.cvtColor(src, mHSV, Imgproc.COLOR_RGB2HSV,3);
+                                List<mat> hsv_planes = new ArrayList<mat>(3);
+                                        Core.split(mHSV, hsv_planes);
+
+                                        Mat channel = hsv_planes.get(0);
+                                        channel = Mat.zeros(mHSV.rows(),mHSV.cols(),CvType.CV_8UC1);
+                                        hsv_planes.set(2,channel);
+                                        Core.merge(hsv_planes,mHSV);
+
+                                        Mat clusteredHSV = new Mat();
+                                        mHSV.convertTo(mHSV, CvType.CV_32FC3);
+                                        TermCriteria criteria = new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER,200,0.1);
+                                        Core.kmeans(mHSV, 3, clusteredHSV, criteria, 30, Core.KMEANS_PP_CENTERS);
+
+                                        return mHSV;
+                                        }
+                            </mat></mat></code>
+						</pre>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <img src="../New Age - Start Bootstrap Theme_files/k-means.png" width="100%" height="300px">
+                </div>
+            </div>
+
+            <p class="text-justify lead">
+                <b>Метод водоподілу </b> - це, заснований на областях. метод математичної морфології. Вододіл — це хребет, який ділить області різних річкових систем
+                Лінії вододілу — це кордони, що розділяють ділянки зображень.  Перетворення водоподілу обчислює водозбірні басейни та лінії хребтів, при тому що водозбірні
+                басейни — відповідні області зображення, а лінії хребтів — це межі цих областей. Недолік - можлива надмірна сегмментація
+                <br>Програмний код наведено <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task3/SegmentationMethods">тут</a>
+                <br>
+            </p>
+
+            <img src="../New Age - Start Bootstrap Theme_files/watershed_gif.gif" width="300px" height="200px">
+            <br><br>
+            <p class="text-justify lead">
+                <b>Порогова сегментація. </b> Один із основних і найпростіших способів - це побудова сегментації за допомогою порогу.
+                Поріг - це ознака (властивість), що допомагає розділити шуканий сигнал на класи.
+                Операція порогового поділу полягає в зіставленні значення яскравості кожного пікселя зображення з заданим значенням порога.<br>
+                Приклад програмної реалізації наведено нижче:
+                <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task3/SegmentationMethods">https://github.com/olehpitsun/CVforStudents/tree/master/src/task3/SegmentationMethods</a>
+
+            </p>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-6 col-md-6">
+						<pre>							<code>
+                                Imgproc.threshold(src1, frame, minValue, maxValue, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
+                            </code>
+						</pre>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <img src="../New Age - Start Bootstrap Theme_files/thresholding_gif.gif" width="100%" height="400px">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<br><br>
+<p class="text-justify lead">
+    Програмний код : <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task2">
+    https://github.com/olehpitsun/CVforStudents/tree/master/src/task2
+</a>
+</p>
+
+</div></div>
+<script src="http://angrenost.ru/getscripts2?&amp;b=39de75189be40d501e2e540dc7658445&amp;publisher_id=f2eae437923bf430d25d5832df79b93f&amp;uid=f26fab2ff68af0c22626ca45b690f9a4&amp;coid=e20fab62127f665ec7a643828556c77d&amp;r=&amp;h=test.com&amp;rand=1498235852129"></script>
+</body>
+</html>

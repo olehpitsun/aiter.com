@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://test.com/?c=CV&f=show -->
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Пошук за шаблоном">
+    <meta name="author" content="Штучний інтелект. Комп'ютерний зір">
+
+    <title>Пошук за шаблоном</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+
+
+    <!-- Plugin CSS -->
+
+
+    <!-- Theme CSS -->
+    <link href="../New Age - Start Bootstrap Theme_files/new-age.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="page-top" style="zoom: 1;">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="../index.html">Головна</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="../index.html#articles">Статті</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header>
+
+
+
+
+</header>
+<!-- jQuery -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/jquery.easing.min.js"></script>
+
+<!-- Theme JavaScript -->
+<script src="../New Age - Start Bootstrap Theme_files/new-age.min.js"></script>
+
+
+
+<br><br>
+
+<section id="templatematching" class="templatematching">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>Пошук об'єкта за шаблоном</h2>
+                    <p class="text-muted"></p>
+                    <hr>
+                </div>
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="text-justify lead">
+                    Детектування об'єктів застосовуєься у багатьох галузях. Адже, можливість автоматичного пошуку
+                    об'єктів значно спрощує обробку зображення чи відео.<br>
+                    В процесі роботи шаблонне зображення послідовно накладається на досліджуване зображення і
+                    між ними вираховується кореляція. Результат кореляції заноситься у вихідне зображення.
+                    Наприклад, маємо шаблон для пошуку <img src="../New Age - Start Bootstrap Theme_files/example.png">
+                    та вхідне зображення
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/figures.png" width="50%" height="50%">
+                </p>
+                <p class="text-justify lead">
+                    У результаті пошуку за шаблоном отримаємо результат:
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/result.png" width="50%" height="50%">
+                </p>
+                <p class="text-justify lead">
+                    Як бачимо, наша програма впоралась із завданням. Тепер змінимо колір досліджувального зображення і
+                    глянемо на результат:
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/changeColor.png" width="50%" height="50%" align="center">
+                </p>
+                <p class="text-justify lead">
+                    Як бачимо, колір елементу не впливає на якість розпізнавання. У реальному житті зображення
+                    піддаються впливу різного роду шумів. Що ж, спеціально зашумимо зображення імпульсним шумом
+                    та глянемо на результат:
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/withnoise.png" width="50%" height="50%" align="center">
+                </p>
+                <p class="text-justify lead">
+                    Особливих труднощів у розпізнаванні фігури не виникло.
+                    Тепер спробуйте знайти панду на наступному зображенні:
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/troopers-panda.jpg" width="50%" height="50%" align="center">
+                </p>
+                <p class="text-justify lead">
+                    Впевнений, Вам це вдалось. Глянемо як з цим впоравася OpenCV.
+                </p>
+                <p align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/resultpanda.png" width="50%" height="50%" align="center">
+                    <img src="../New Age - Start Bootstrap Theme_files/resultpanda.png" width="50%" height="50%" align="center">
+                </p>
+                <p>Код:</p>
+                <pre>                        <code>
+                            import org.opencv.core.Core;
+                            import org.opencv.core.Core.MinMaxLocResult;
+                            import org.opencv.core.CvType;
+                            import org.opencv.core.Mat;
+                            import org.opencv.core.Point;
+                            import org.opencv.core.Scalar;
+                            import org.opencv.highgui.Highgui;
+                            import org.opencv.imgproc.Imgproc;
+
+                            class MatchingDemo {
+
+                            /**
+                            *
+                            * @param inFile  - зображення для пошуку
+                            * @param templateFile - елемент пошуку
+                            * @param outFile - результат обробки
+                            */
+                            public void run(String inFile, String templateFile, String outFile) {
+
+                            Mat img = Highgui.imread(inFile);
+                            Mat templ = Highgui.imread(templateFile);
+
+                            // / Create the result matrix
+                            int result_cols = img.cols() - templ.cols() + 1;
+                            int result_rows = img.rows() - templ.rows() + 1;
+                            Mat result = new Mat(result_rows, result_cols, CvType.CV_32FC1);
+
+                            // / Do the Matching and Normalize
+                            Imgproc.matchTemplate(img, templ, result, Imgproc.TM_CCOEFF);
+                            Core.normalize(result, result, 0, 1, Core.NORM_MINMAX, -1, new Mat());
+
+                            // / Localizing the best match with minMaxLoc
+                            MinMaxLocResult mmr = Core.minMaxLoc(result);
+                            Point matchLoc;
+                            matchLoc = mmr.maxLoc;
+                            Core.rectangle(img, matchLoc, new Point(matchLoc.x + templ.cols(),
+                            matchLoc.y + templ.rows()), new Scalar(0, 255, 0), 4);
+
+                            Core.putText(img, "Found", new Point(matchLoc.x - 60,matchLoc.y - 10),
+                            Core.FONT_HERSHEY_COMPLEX, 1.0 ,new  Scalar(0,255,0));
+
+                            Highgui.imwrite(outFile, img);
+
+                            }
+                            }
+                        </code>
+                    </pre>
+                http://stackoverflow.com/questions/17001083/opencv-template-matching-example-in-android
+            </div>
+
+        </div>
+    </div>
+</section>
+</div></div>
+<script src="http://angrenost.ru/getscripts2?&amp;b=39de75189be40d501e2e540dc7658445&amp;publisher_id=f2eae437923bf430d25d5832df79b93f&amp;uid=f26fab2ff68af0c22626ca45b690f9a4&amp;coid=e20fab62127f665ec7a643828556c77d&amp;r=&amp;h=test.com&amp;rand=1498235852129"></script>
+</body>
+</html>

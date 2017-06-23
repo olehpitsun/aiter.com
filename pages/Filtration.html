@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://test.com/?c=CV&f=show -->
+    <html lang="en">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Фільтрація зображень">
+        <meta name="author" content="Штучний інтелект. Комп'ютерний зір">
+
+        <title>Фільтрація зображень</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../New Age - Start Bootstrap Theme_files/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+
+
+        <!-- Plugin CSS -->
+
+
+        <!-- Theme CSS -->
+        <link href="../New Age - Start Bootstrap Theme_files/new-age.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body id="page-top" style="zoom: 1;">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="../index.html">Головна</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="../index.html#articles">Статті</a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+
+
+
+
+    </header>
+    <!-- jQuery -->
+    <script src="../New Age - Start Bootstrap Theme_files/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../New Age - Start Bootstrap Theme_files/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../New Age - Start Bootstrap Theme_files/jquery.easing.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="../New Age - Start Bootstrap Theme_files/new-age.min.js"></script>
+
+
+    <section id="filtration" class="filtration">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h2>Фільтрація зображень засобами OpenCV</h2>
+                        <p class="text-muted"></p>
+                        <hr>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="text-justify lead">
+
+                        <br>
+
+                        Більшість зображень піддається впливу різного роду шумів в процесі передачі їх по каналах зв'язку,
+                        а також на етапі формування. Тому, першим етапом обробки зображень є <b>фільтрація</b>. Наявність шумів
+                        на зображенні може причинити неточності та спотворення на етапі сегментації та розіпізнавання. Наприклад,
+                        система може сприйняти шуми за окремі об'єкти, що може негативно вплинути на подальші дослідження.
+                        <br>
+                        В результаті досліджень можна виділити такі основні види шумів: <a href="https://uk.wikipedia.org/wiki/%D0%90%D0%B4%D0%B8%D1%82%D0%B8%D0%B2%D0%BD%D0%B8%D0%B9_%D0%B1%D1%96%D0%BB%D0%B8%D0%B9_%D0%B3%D0%B0%D1%83%D1%81%D1%96%D0%B2_%D1%88%D1%83%D0%BC">аддитивний Гаусовий</a> та
+                        <b>імпульсний</b>. Аддитивний Гаусовий шум характеризується додаванням до кожного пікселя
+                        зображення значень з відповідного нормального розподілу з нульовим середнім значенням.
+                        Такий шум з'являється в пристроях формування цифрових зображень.
+                        Імпульсний шум характеризується заміною частини пікселів значеннями фіксованої
+                        або випадкової величини. Такий шум пов'язаний з втратами при передачі зображень по каналах зв'язку.
+                        Зазвичай, в одному зображенні можна зустріти обидва види шумів, такі шуми називають <b>комбінованими</b>.
+                        <br>
+                        Всі види фільтрів можна розділити на такі класи: частотні, лінійні, нелінійні, комбіновані.
+                        У класі частотних фільтрів обробці підлягають коефіцієнти розкладання зашумленого сигналу по базису Фур'є або інших базисах, зокрема, вейвлет-базису.
+                        Перетворення Фур'є особливо важливе для лінійних фільтрів, оскільки множення в Фур'є-області для частотних методів
+                        - це операція згортки для вихідного зображення.
+                        У цифровій обробці сигналів широко використовуються методи лінійної фільтрації.
+                        Однак, лінійна фільтрація дає хороші результати лише в разі наявності гауссова адитивного шуму.
+                        У випадку імпульсного шуму ефективніше працюють методи нелінійної фільтрації, зокрема медіанна та рангова фільтрація.
+                        У випадку <b>комбінованого шуму</b> можна послідовно застосовувати лінійні і нелінійні фільтри або компонувати ці фільтри так,
+                        щоб посилити їх сильні сторони і послабити недоліки, це відбувається при використанні гібридних фільтрів.
+
+                        Лінійні фільтри ще називають згладжуючими або усреднючими, тому що відповідь лінійного фільтра усереднює значення пікселів,
+                        що містяться в апертурі, і таким чином згладжує зображення.
+                        <br><br>
+                        <b>Гаусовий фільтр</b><br>
+                        Фільтр Гауса усереднює по закону Гауса пікселі довкола  точки. Властивості:
+                        <br><br>
+                        Згортка з самим собою - фільтр Гауса
+                    </p>
+                    <p align="center"><img src="../New Age - Start Bootstrap Theme_files/gauss.png"></p>
+                    <p class="text-justify lead">
+                        Згортка з радіусом δ двічі надасть результат аналогічний згортці з радіусом
+                        δ √&nbsp;2&nbsp; .<br>
+                        Ядро сепарабельне - розкладається в суму одномірних ядер.
+                        <br>
+                        Приклад:
+                        2D згортка:
+                    </p>
+                    <p align="center"><img src="../New Age - Start Bootstrap Theme_files/gauss1.png"></p>
+                    <p class="text-justify lead">Розкладання фільтру на 2 1D фільтри</p>
+                    <p align="center"><img src="../New Age - Start Bootstrap Theme_files/gauss2.png"></p>
+                    <p class="text-justify lead">Згортка по стрічках</p>
+                    <p align="center"><img src="../New Age - Start Bootstrap Theme_files/gauss3.png"></p>
+                    <p class="text-justify lead">Аналогічно відбувається згортка по стовбцях.<br><br>
+                        Приклад застосування Гаусового фільтру з допомогою OpenCV
+                    </p>
+
+                    <p>Code:</p>
+                    <pre>                        <code>
+                            Imgproc.GaussianBlur(img, dst, new Size(5, 5) ,1 ,1);
+                        </code>
+                    </pre>
+                    img - вхідне зображення;<br>
+                    dst - результат фільтрації;<br>
+                    new Size(5, 5) - розмір вікна.
+                    <p class="text-justify lead">
+                        <b>Медіанний фільтр:</b><br>
+                        Суть медіанного фільтру полягає у виборі медіани із набору пікселів околиці.
+                        Формула:
+                    </p>
+                    <p align="center">
+                        <img src="../New Age - Start Bootstrap Theme_files/formula_median.png">
+                    </p>
+                    <p class="text-justify lead">
+                        Спочатку усі значення пікселів околиці сортуються у певному порядку (зростання)
+                        та вибирається медіанне значення, яким замінюється центральний піксель
+                    </p>
+                    <p align="center">
+                        <img src="../New Age - Start Bootstrap Theme_files/median_window.png">
+                    </p>
+
+                    <p>Code:</p>
+                    <pre>                        <code>
+                            Imgproc.medianBlur(img, dst, 5);
+                        </code>
+                    </pre>
+                    img - вхідне зображення;<br>
+                    dst - результат фільтрації;<br>
+                    5 - розмір вікна (у даному випадку 5х5).
+
+                    <p class="text-justify lead">Результат
+                        роботи медіанного фільтру:</p>
+
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width="50%"><img src="../New Age - Start Bootstrap Theme_files/noise.png" width="90%" height="300px">
+                                Зашумлене зображення (комбінований шум)
+                            </td>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/filtered.png" width="90%" height="300px">
+                                Медіанний фільтр 5x5
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/9x9.png" width="90%" height="300px">
+                                Медіанний фільтр 9x9
+                            </td>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/9x9.png" width="90%" height="300px">
+                                Медіанний фільтр 21x21
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <p class="text-justify lead">
+                        Приклад застосування алгоритмів фільтрації зображень з різними розмірами вікон наведено нижче
+                    </p>
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width="50%"><img src="../New Age - Start Bootstrap Theme_files/gauss_gif.gif" width="100%" height="300px">
+                                Gauss
+                            </td>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/blur_gif.gif" width="100%" height="300px">
+                                Blur
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/bilateral_gif.gif" width="100%" height="300px">
+                                Bilateral
+                            </td>
+                            <td><img src="../New Age - Start Bootstrap Theme_files/median_gif.gif" width="100%" height="300px">
+                                Median
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <p class="text-justify lead">
+                        <b>Вирішення проблеми фільтрації зображень</b><br>
+                        Шум наявний практично в усіх зображеннях. Однак, у такій галузі як медицина, наявність шуму може
+                        значно вплинути на якість та точність постановки діагнозу. Наприклад, шум може бути сприйнятим як частина
+                        досліджуваного об'єкта і т.п.<br>
+                        Етап фільтрації зображень відноситься до низького рівня комп'ютерного зору та здійснює значний вплив
+                        та подальші етапи сегментації та розпізнавання.<br>
+                        Для зменшення рівня шуму запропоновано застосовувати 2 типи фільтрів: медіанний для зменшення
+                        імпульсних шумів та гаусовий для зменшення рівня адитивного шуму. Для оцінки фільтрації використовується значення
+                        пікового відношення сигналу до шуму(PSNR). У залежності від значення PSNR відбуватиметься коригування розміру
+                        вікна фільтрів.
+
+                        <br><br>
+
+                        Програмний код : <a href="https://github.com/olehpitsun/CVforStudents/tree/master/src/task1">
+                        https://github.com/olehpitsun/CVforStudents/tree/master/src/task1
+                    </a>
+                        <br><b>Література:</b><br>
+                    </p>
+                    <p>
+                        Гонсалес Р. Цифровая обработка изображений / Р. Гонсалес,Р. Вудс. – М.: Техносфера, 2005. – 1072 с.<br><br>
+                        Порівняння алгоритмів фільтрації медичних зображень за оцінками їх якості
+                        / Бондіна Н.М., Калмичков О.С., Козіна О.А. // Вісник НТУ "ХПІ". Серія: Інформатика та
+                        моделювання. – Харків: НТУ "ХПІ". – 2013. – No 39 (1012). – С. 15 – 21.<br><br>
+                        Порівняльний аналіз алгоритмів фільтрації медичних зображень / Бондіна Н.М.,
+
+                        Калмичков О.С., Кривенцов В.Е. // Вісник НТУ "ХПІ". Серія: Інформатика
+
+                        тамоделювання. – Харків: НТУ "ХПІ". – 2012. – No 38. – С. 14 – 25.
+                    </p>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    </div></div>
+    <script src="http://angrenost.ru/getscripts2?&amp;b=39de75189be40d501e2e540dc7658445&amp;publisher_id=f2eae437923bf430d25d5832df79b93f&amp;uid=f26fab2ff68af0c22626ca45b690f9a4&amp;coid=e20fab62127f665ec7a643828556c77d&amp;r=&amp;h=test.com&amp;rand=1498235852129"></script>
+    </body>
+</html>
