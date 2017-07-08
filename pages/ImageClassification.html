@@ -29,6 +29,155 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .timeline {
+            list-style: none;
+            padding: 20px 0 20px;
+            position: relative;
+        }
+
+        .timeline:before {
+            top: 0;
+            bottom: 0;
+            position: absolute;
+            content: " ";
+            width: 3px;
+            background-color: #eeeeee;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline > li {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li > .timeline-panel {
+            width: 46%;
+            float: left;
+            border: 1px solid #d4d4d4;
+            border-radius: 2px;
+            padding: 20px;
+            position: relative;
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        }
+
+        .timeline > li > .timeline-panel:before {
+            position: absolute;
+            top: 26px;
+            right: -15px;
+            display: inline-block;
+            border-top: 15px solid transparent;
+            border-left: 15px solid #ccc;
+            border-right: 0 solid #ccc;
+            border-bottom: 15px solid transparent;
+            content: " ";
+        }
+
+        .timeline > li > .timeline-panel:after {
+            position: absolute;
+            top: 27px;
+            right: -14px;
+            display: inline-block;
+            border-top: 14px solid transparent;
+            border-left: 14px solid #fff;
+            border-right: 0 solid #fff;
+            border-bottom: 14px solid transparent;
+            content: " ";
+        }
+
+        .timeline > li > .timeline-badge {
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 1.4em;
+            text-align: center;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            margin-left: -25px;
+            background-color: #999999;
+            z-index: 100;
+            border-top-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel {
+            float: right;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel:before {
+            border-left-width: 0;
+            border-right-width: 15px;
+            left: -15px;
+            right: auto;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel:after {
+            border-left-width: 0;
+            border-right-width: 14px;
+            left: -14px;
+            right: auto;
+        }
+
+        .timeline-badge.primary {
+            background-color: #2e6da4 !important;
+        }
+
+        .timeline-badge.success {
+            background-color: #3f903f !important;
+        }
+
+        .timeline-badge.warning {
+            background-color: #f0ad4e !important;
+        }
+
+        .timeline-badge.danger {
+            background-color: #d9534f !important;
+        }
+
+        .timeline-badge.info {
+            background-color: #5bc0de !important;
+        }
+
+        .timeline-title {
+            margin-top: 0;
+            color: inherit;
+        }
+
+        .timeline-body > p,
+        .timeline-body > ul {
+            margin-bottom: 0;
+        }
+
+        .timeline-body > p + p {
+            margin-top: 5px;
+        }
+    </style>
 
 </head>
 <body id="page-top" style="zoom: 1;">
@@ -112,7 +261,90 @@
                     Для тренувальної вибірки помістимо зображення, що відносяться до певно класу в окрему директорію на диску.
                     До тестової вибірки входять нові зображення (що не увійшли до тренувальної) та знаходять в окремій директорії.
                     Програму для класифікації зображень на основі ЗНМ розроблено на мові програмування Java на основі бібліотеки для глибинного навчання <a href="https://deeplearning4j.org/">deeplearning4j</a> від компанії <a href="https://skymind.ai/">skymind</a> та фреймворку для побудови графічного інтерфейсу JavaFX.
-                    </br>Навчання ЗНМ
+                    </br>
+
+                    <div class="container">
+                        <div class="page-header">
+                            <h1 id="timeline"><center>Основні етапи класифікації зображень</center></h1>
+                        </div>
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title"><b>Підготовка тестової вибірки</b></h4>
+        </div>
+        <div class="timeline-body">
+            <p>
+                <img src="../img/7/teaching.png">
+            </p>
+        </div>
+    </div>
+    </li>
+    <li class="timeline-inverted">
+        <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title"><b>Покращення якості зображення</b></h4>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    Гістограмне вирівнювання
+                    <img src="../img/7/equalize1.jpg" >
+                </p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title">Підбір параметрів навчання нейронної мережі</h4>
+            </div>
+            <div class="timeline-body">
+                <p>
+                    <img src="../img/7/sreen.png" width="100%">
+                </p>
+            </div>
+        </div>
+    </li>
+    <li class="timeline-inverted">
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title"><b>Зберігання результатів навчання</b></h4>
+            </div>
+            <div class="timeline-body">
+                <p>Результати навчання моделі зберігаються на диску у вигляді .zip архіву для подальшого використання</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="timeline-badge info"><i class="glyphicon glyphicon-floppy-disk"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title"><b>Формування тестової вибірки</b></h4>
+            </div>
+            <div class="timeline-body">
+                <p>Усі зображення, що необхідно класифікувати знаходяться в одній директорії</p>
+                <hr>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title">Результати класифікації</h4>
+            </div>
+            <div class="timeline-body">
+                <p>Результати класифікації тестової вибірки відображаються у графічній формі
+                    <img src="../img/7/result.png">
+                </p>
+            </div>
+        </div>
+    </li>
+
+    </ul>
+    </div>
                 </p>
 
                 <p align="center">ЗАГАЛЬНА СТРУКТУРА ЗГОРТКОВИХ НЕЙРОННИХ МЕРЕЖ</p>
